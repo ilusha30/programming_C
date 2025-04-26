@@ -17,13 +17,13 @@ int main(void) {
     printf("Введите строку (до 80 символов): ");
     fgets(input, MAX_LENGTH + 1, stdin);
 
-    input[strcspn(input, "\n")] = 0;
-
     for (int i = 0; i < strlen(input); i++) {
         if (input[i] == 'a') {
             input[i] = 'A';
         } else if (input[i] == 'b') {
             input[i] = 'B';
+        } else if (input[i] == '!'){
+            input[i] = '?';
         }
     }
 
