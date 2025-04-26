@@ -63,24 +63,28 @@ int main(void) {
         printf("\n");
     }
     
-    // Вычисление квадрата матрицы
-        for(int i = 0; i < 2; i++) {
-            for(int j = 0; j < 2; j++) {
-                for(int k = 0; k < 2; k++) {
-                    cvadrat[i][j] += matrix2[i][k] * matrix2[k][j];
-                }
-            }
-        }
+    // Обнуление массива cvadrat
+    for (int i = 0; i < 2; i++)
+        for (int j = 0; j < 2; j++)
+            cvadrat[i][j] = 0;
 
-        // Вывод результата
-        printf("Квадрат матрицы:\n");
-        for(int i = 0; i < 2; i++) {
-            for(int j = 0; j < 2; j++) {
-                printf("%d ", cvadrat[i][j]);
+    // Вычисление квадрата матрицы
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            for (int k = 0; k < 2; k++) {
+                cvadrat[i][j] += matrix2[i][k] * matrix2[k][j];
             }
-            printf("\n");
         }
-    
+    }
+
+    // Вывод результата
+    printf("Квадрат матрицы:\n");
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            printf("%d ", cvadrat[i][j]);
+        }
+        printf("\n");
+    }
     return 0;
     
 }
