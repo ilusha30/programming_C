@@ -22,9 +22,15 @@ int main(void) {
     if (check_triangle(a, b, c)) {
         double perimeter = calculate_perimeter(a, b, c);
         double area = calculate_area(a, b, c);
+        double Ha = calculate_Ha(a, b , c);
+        double Hb = calculate_Hb(a, b,  c);
+        double Hc = calculate_Hc(a, b,  c);
 
         printf("Периметр треугольника: %.2f\n", perimeter);
         printf("Площадь треугольника: %.2f\n", area);
+        printf("Длинна высоты к стороне A: %.2f\n", Ha);
+        printf("Длинна высоты к стороне B: %.2f\n", Hb);
+        printf("Длинна высоты к стороне C: %.2f\n", Hc);
     } else {
         printf("Неравенство треугольника не выполнено. Введите другие значения.\n");
     }
