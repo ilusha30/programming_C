@@ -17,3 +17,19 @@ double calculate_area(double a, double b, double c) {
     return sqrt(s * (s - a) * (s - b) * (s - c));
 }
 
+//Функция для вычисления высот к сторонам
+double calculate_Ha(double a, double b, double c){
+    double s = (a + b + c) / 2;
+    return (2 * sqrt(s * (s - a) * (s - b) * (s - c)))/a;
+}
+
+double calculate_Hb(double a, double b, double c){
+    double s = (a + b + c) / 2;
+    return (2 * sqrt(s * (s - a) * (s - b) * (s - c)))/b;
+}
+
+double calculate_Hc(double a, double b, double c){
+    double s = (a + b + c) / 2;
+    return (2 * sqrt(s * (s - a) * (s - b) * (s - c)))/c;
+}
+
