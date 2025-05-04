@@ -10,5 +10,7 @@
 
 double calculate_perimeter(double a, double b, double c);
 double calculate_area(double a, double b, double c);
-
+double calculate_Ha(double a, double b, double c);
+double calculate_Hb(double a, double b, double c);
+double calculate_Hc(double a, double b, double c);
 #endif
