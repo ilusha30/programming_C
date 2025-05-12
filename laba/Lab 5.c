@@ -18,59 +18,49 @@ int main(void) {
     }
 
     // Выделяем память под две матрицы
-    double* a = (double*)malloc(n * n * sizeof(double));
-    double* b = (double*)malloc(n * n * sizeof(double));
+    double** a = create_matrix(n);
+    double** b = create_matrix(n);
 
     if (!a || !b) {
         printf("Ошибка выделения памяти.\n");
-        free(a);
-        free(b);
+        free_matrix(a, n);
+        free_matrix(b, n);
         return 1;
     }
 
     printf("Введите элементы первой матрицы (%d элементов):\n", n * n);
-    for (int i = 0; i < n * n; i++) {
-        if (scanf("%lf", &a[i]) != 1) {
-            printf("Ошибка ввода элемента.\n");
-            free(a);
-            free(b);
-            return 1;
-        }
-    }
+    input_matrix(a, n);
 
     printf("Введите элементы второй матрицы (%d элементов):\n", n * n);
-    for (int i = 0; i < n * n; i++) {
-        if (scanf("%lf", &b[i]) != 1) {
-            printf("Ошибка ввода элемента.\n");
-            free(a);
-            free(b);
-            return 1;
-        }
-    }
+    input_matrix(b, n);
 
+
+    double** result_plus = matrix_plus(a, b, n );
+    double** result_min = matrix_min(a, b, n );
+    double** result_um = matrix_um(a, b, n );
+    
     char op;
     printf("Введите операцию ('+', '-' или '*'): ");
     scanf(" %c", &op);
 
-    double* result = matrix_operation(a, b, n, op);
+    double** result = matrix_operation(a, b, n, op);
     if (!result) {
         printf("Ошибка: неверный оператор или ошибка выделения памяти.\n");
-        free(a);
-        free(b);
+        free_matrix(a, n);
+        free_matrix(b, n);
         return 1;
     }
 
+    
     printf("Результат операции:\n");
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            printf("%lf ", result[i * n + j]);
-        }
-        printf("\n");
-    }
+    print_matrix(result_plus, n);
+    print_matrix(result_min, n);
+    print_matrix(result_um, n);
+    print_matrix(result, n);
 
-    free(a);
-    free(b);
-    free(result);
+    free_matrix(a, n);
+    free_matrix(b, n);
+    
 
     return 0;
 }
