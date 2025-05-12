@@ -5,40 +5,104 @@
 //  Created by Илья Овсянников on 22.04.2025.
 //
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "matrix-ops.h"
 
-double* matrix_operation(const double* a, const double* b, int n, char op) {
-    double* result = (double*)malloc(n * n * sizeof(double));
-    if (!result) return NULL;
+// Выделение памяти под матрицу n x n
+double** create_matrix(int n){
+    double** matrix = malloc(n * sizeof(double*));
+    if (!matrix) return NULL;
+    
+    for (int i = 0; i < n; i++) {
+        matrix[i] = malloc(n * sizeof(double));
+    }return matrix;
+}
 
-    int i, j, k;
 
-    if (op == '+') {
-        for (i = 0; i < n * n; i++) {
-            result[i] = a[i] + b[i];
-        }
+// Освобождение памяти матрицы n x n
+void free_matrix(double** matrix, int n) {
+    if (!matrix) return;
+    for (int i = 0; i < n; i++) {
+        free(matrix[i]);
     }
-    else if (op == '-') {
-        for (i = 0; i < n * n; i++) {
-            result[i] = a[i] - b[i];
-        }
-    }
-    else if (op == '*') {
-        for (i = 0; i < n; i++) {
-            for (j = 0; j < n; j++) {
-                double sum = 0.0;
-                for (k = 0; k < n; k++) {
-                    sum += a[i * n + k] * b[k * n + j];
-                }
-                result[i * n + j] = sum;
+    free(matrix);
+}
+
+// Ввод элементов матрицы n x n
+void input_matrix(double** matrix, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (scanf("%lf", &matrix[i][j]) != 1) {
+                printf("Ошибка ввода элемента [%d][%d]\n", i, j);
             }
         }
     }
-    else {
-        // Неверный оператор — освобождаем память и возвращаем NULL
-        free(result);
-        return NULL;
+}
+
+// Вывод матрицы n x n
+void print_matrix(double** matrix, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%10.4lf ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+
+double** matrix_plus(double**a ,double** b, int n){
+    double** result_pl = create_matrix(n);
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++)
+            result_pl[i][j] = a[i][j] + b[i][j];
+    }
+    return result_pl;
+}
+
+double**  matrix_min(double**a ,double** b, int n){
+    double** result_m = create_matrix(n);
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++)
+            result_m[i][j] = a[i][j] - b[i][j];
+    }return result_m;
+}
+double**  matrix_um(double**a ,double** b, int n){
+    double** result_um = create_matrix(n);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            double sum = 0.0;
+            for (int k = 0; k < n; k++) {
+                sum += a[i][k] * b[k][j];
+            }
+            result_um[i][j] = sum;
+        }
+    }return result_um;
+}
+
+// Операции над матрицами n x n
+double** matrix_operation(double** a, double** b, int n, char op) {
+    double** result = create_matrix(n);
+    if (!result) return NULL;
+
+    switch (op) {
+        case '-':
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
+                    result[i][j] = a[i][j] - b[i][j];
+            break;
+
+        case '*':
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    double sum = 0.0;
+                    for (int k = 0; k < n; k++) {
+                        sum += a[i][k] * b[k][j];
+                    }
+                    result[i][j] = sum;
+                }
+            }
+            break;
     }
 
     return result;
