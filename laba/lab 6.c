@@ -17,22 +17,21 @@ int main(void) {
     char lastName[50], firstName[50], middleName[50];
     int year;
 
+    const char *inputPath = "/Users/ilaovsannikov/прог-е/C labs/C labs/input.txt";
+    const char *outputPath = "/Users/ilaovsannikov/прог-е/C labs/C labs/output.txt";
 
-    inputFile = fopen("input.txt", "r");
-    outputFile = fopen("output.txt", "w");
-   
+    inputFile = fopen(inputPath, "r");
+    outputFile = fopen(outputPath, "w");
 
     while (fscanf(inputFile, "%49s %49s %49s %d", lastName, firstName, middleName, &year) == 4) {
         if (year > 1980) {
             fprintf(outputFile, "%s %s %s %d\n", lastName, firstName, middleName, year);
         }
     }
-  
+
     fclose(inputFile);
     fclose(outputFile);
 
     printf("Фильтрация завершена. Результаты записаны\n");
     return 0;
 }
-
-
