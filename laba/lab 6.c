@@ -17,14 +17,11 @@ int main(void) {
     char lastName[50], firstName[50], middleName[50];
     int year;
 
-    const char *inputPath = "/Users/ilaovsannikov/прог-е/C labs/C labs/input.txt";
-    const char *outputPath = "/Users/ilaovsannikov/прог-е/C labs/C labs/output.txt";
-
-    inputFile = fopen(inputPath, "r");
-    outputFile = fopen(outputPath, "w");
+    inputFile = fopen("/Users/ilaovsannikov/прог-е/C labs/C labs/input.txt", "r");
+    outputFile = fopen("/Users/ilaovsannikov/прог-е/C labs/C labs/output.txt", "w");
 
     while (fscanf(inputFile, "%49s %49s %49s %d", lastName, firstName, middleName, &year) == 4) {
-        if (year > 1980) {
+        if ((unsigned char)firstName[0] == 0xD0 && (unsigned char)firstName[1] == 0x90){
             fprintf(outputFile, "%s %s %s %d\n", lastName, firstName, middleName, year);
         }
     }
@@ -35,3 +32,4 @@ int main(void) {
     printf("Фильтрация завершена. Результаты записаны\n");
     return 0;
 }
+
