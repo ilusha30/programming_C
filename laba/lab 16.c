@@ -5,7 +5,7 @@
 //  Created by Илья Овсянников on 17.05.2025.
 //Написать программу подсчитывающая количество битов, выставленных в единицу у числа типа long и double. Сами значения чисел вводятся с клавиатуры.
 
-/*#include <stdio.h>
+#include <stdio.h>
 
 int count_bits_long(long num) {
     int count = 0;
@@ -56,6 +56,6 @@ int main(void) {
     printf("Количество битов, установленных в 1 в числе double: %d\n", bits_double);
 
     return 0;
-}*/
+}
 
 
