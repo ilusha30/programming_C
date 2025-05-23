@@ -10,7 +10,7 @@
 - now – текущую дату.*/
 
 
-/*#include <stdio.h>
+#include <stdio.h>
 #include <string.h>
 #include <time.h>
 
@@ -110,4 +110,4 @@ int main(void) {
     }
 
     return 0;
-}*/
+}
