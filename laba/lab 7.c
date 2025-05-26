@@ -3,12 +3,13 @@
 //  C labs
 //
 //  Created by Илья Овсянников on 22.05.2025.
-//Объявить тип-структуру humen, включающую имя человека, фамилию и год рождения. Объявить два массива из четырёх элементов типа humen. Ввести с консоли или из файла элементы одного массива и построить на их основе другой, упорядочив элементы по го-дам рождения. Вывести результат.
+//Объявить тип-структуру humen, включающую имя человека, фамилию и год рождения. Объявить два массива из четырёх элементов типа humen. Ввести с консоли или из файла элементы одного массива и построить на их основе другой, упорядочив элементы по годам рождения. Вывести результат.
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-#define SIZE 4
+#define SIZE 9
 
 typedef struct {
     char name[50];
@@ -16,18 +17,14 @@ typedef struct {
     int birth_year;
 } humen;
 
-void input_humen(humen arr[], int n) {
+void read_from_file(humen arr[], int n, const char* filename) {
+    FILE* file = fopen("/Users/ilaovsannikov/прог-е/C labs/C labs/input.txt", "r");
+    
     for (int i = 0; i < n; i++) {
-        printf("Введите имя человека %d: ", i + 1);
-        scanf("%49s", arr[i].name);
-        printf("Введите фамилию человека %d: ", i + 1);
-        scanf("%49s", arr[i].surname);
-        printf("Введите год рождения человека %d: ", i + 1);
-        scanf("%d", &arr[i].birth_year);
+            fscanf(file, "%49s %49s %d", arr[i].name, arr[i].surname, &arr[i].birth_year);
+        }
+        fclose(file);
     }
-}
-
-
 void sort_by_birth_year(humen src[], humen dest[], int n) {
     for (int i = 0; i < n; i++) {
         dest[i] = src[i];
@@ -53,12 +50,10 @@ void print_humen(humen arr[], int n) {
 int main(void) {
     humen array1[SIZE];
     humen array2[SIZE];
-
-    input_humen(array1, SIZE);
-
+    
+    read_from_file(array1, SIZE, "/Users/ilaovsannikov/прог-е/C labs/C labs/input.txt");
     sort_by_birth_year(array1, array2, SIZE);
-
     print_humen(array2, SIZE);
-
+    
     return 0;
 }
