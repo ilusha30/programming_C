@@ -33,21 +33,40 @@ int count_bits_double(double num) {
     return count;
 }
 
+void print_binary_long(long num) {
+    unsigned long mask = 1UL << (sizeof(long) * 8 - 1);
+    printf("Двоичное представление long: ");
+    for (int i = 0; i < sizeof(long) * 8; i++) {
+        printf("%d", (num & mask) ? 1 : 0);
+        mask >>= 1;
+        if ((i + 1) % 8 == 0) printf(" ");     }
+    printf("\n");
+}
+
+void print_binary_double(double num) {
+    unsigned char *ptr = (unsigned char*)&num;
+    printf("Двоичное представление double: ");
+    for (int i = (int)sizeof(double) - 1; i >= 0; i--) {
+        for (int j = 7; j >= 0; j--) {
+            printf("%d", (ptr[i] & (1 << j)) ? 1 : 0);
+        }
+        printf(" ");
+    }
+    printf("\n");
+}
+
 int main(void) {
     long lnum;
     double dnum;
 
     printf("Введите число типа long: ");
-    if (scanf("%ld", &lnum) != 1) {
-        printf("Ошибка ввода для long.\n");
-        return 1;
-    }
+    scanf("%ld", &lnum);
 
     printf("Введите число типа double: ");
-    if (scanf("%lf", &dnum) != 1) {
-        printf("Ошибка ввода для double.\n");
-        return 1;
-    }
+    scanf("%lf", &dnum);
+
+    print_binary_long(lnum);
+    print_binary_double(dnum);
 
     int bits_long = count_bits_long(lnum);
     int bits_double = count_bits_double(dnum);
